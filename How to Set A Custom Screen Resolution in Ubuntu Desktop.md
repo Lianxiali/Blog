@@ -1,14 +1,14 @@
-*How to Set A Custom Screen Resolution in Ubuntu Desktop
+#How to Set A Custom Screen Resolution in Ubuntu Desktop
 https://www.tecmint.com/set-display-screen-resolution-in-ubuntu/
 
-** Changing the Resolution or Orientation of the Screen Using Displays
+## Changing the Resolution or Orientation of the Screen Using Displays
 Normally, to change the resolution or orientation of the screen, you can use the Displays graphical user interface tool (open the Activities overview and type Displays, click to open it or System Menu then type Displays and open it).
 
 *Note:* In case you have multiple displays connected to your computer (as shown in the following image), if they are not mirrored, you can have different settings on each display. To change the settings for a display device, select it in the preview area.
 
 Next, select the *resolution* or *scale* you want to use, and choose the *orientation* then click Apply. Then select Keep This Configuration.
 
-** Changing the Resolution or Orientation of the Screen Using Xrandr
+## Changing the Resolution or Orientation of the Screen Using Xrandr
 
 Alternatively, you can also use the powerful *xrandr* tool (a command-line interface to RandR (Resize and Rotate) X Window System extension) which is used to set the size, orientation and/or reflection of the outputs for a screen.
 
@@ -21,7 +21,7 @@ To show the names of different outputs available on your system and resolutions 
 
 > $ xrandr
 
-** Set Screen Resolution in Ubuntu
+## Set Screen Resolution in Ubuntu
 To set the resolution for a screen for an external monitor named DP-1 to 1680×1050, use the --mode flag as shown.
 
 > $ xrandr --output DP-1 --mode 1680x1050
@@ -37,7 +37,7 @@ Keep in mind that any changes made using xrandr will only last until you log out
 
 You can also use the ~/.xprofile file (add xrandr commands in it), however, there are some disadvantages of using this method, one is that this script is read fairly late in the startup process, thus it will not alter the resolution of the display manager (if you use one e.g lightdm).
 
-** How to Add Missing or Set Custom Display Resolution Using xrandr
+## How to Add Missing or Set Custom Display Resolution Using xrandr
 It is possible to add a missing or custom display resolution e.g 1680 x 1000 to Displays panel, for a specific display device (DP-1), as explained below.
 
 To add a missing or custom display resolution, you need to calculate the VESA Coordinated Video Timing (CVT) modes for it. You can do this using the cvt utility as follows.
