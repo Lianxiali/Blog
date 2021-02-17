@@ -1,4 +1,4 @@
-#How to Set A Custom Screen Resolution in Ubuntu Desktop
+# How to Set A Custom Screen Resolution in Ubuntu Desktop
 https://www.tecmint.com/set-display-screen-resolution-in-ubuntu/
 
 ## Changing the Resolution or Orientation of the Screen Using Displays
