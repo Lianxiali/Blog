@@ -1,0 +1,3 @@
+OpenFOAM Removed group 'wall' which clashes with patch 2 of the same name.
+
+There may be some errors regarding the boundary patch names in the boundard condition files.
