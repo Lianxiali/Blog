@@ -1,0 +1,17 @@
+import CrossSectionAnalysis
+logic = CrossSectionAnalysis.CrossSectionAnalysisLogic()
+centerline = getNode("Centerline curve (0)")
+segmentation = getNode("Segmentation")
+logic.setInputCenterlineNode(centerline)
+logic.setLumenSurface(segmentation, "Segment_1")
+logic.run()
+
+points = slicer.util.arrayFromMarkupsCurvePoints(centerline, world=True)
+numberOfPoints = len(points)
+print(numberOfPoints)
+for i in range(numberOfPoints):
+    if i%10!=0:
+        continue
+    crossSectionPolyData = logic.computeCrossSectionPolydata(i)
+    model = slicer.modules.models.logic().AddModel(crossSectionPolyData)
+    # Add your export code to STL here
