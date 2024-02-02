@@ -38,8 +38,8 @@ for i in range(numberOfControlPoints):
     Mass.Update() 
     area=Mass.GetSurfaceArea()
     volume=Mass.GetVolume()
-    r = np.sqrt(area/(4*np.pi))
-    section_data_file.write(f'{i:3}\t{pt[0]:20.14}\t{pt[1]:20.14}\t{pt[2]:20.14}\t{n[0]:20.14}\t{n[1]:20.14}\t{n[2]:20.14}\t{area:20.14} \t{r:20.14}\n')
+    d = np.sqrt(4*area/(np.pi))
+    section_data_file.write(f'{i:3}\t{pt[0]:20.14}\t{pt[1]:20.14}\t{pt[2]:20.14}\t{n[0]:20.14}\t{n[1]:20.14}\t{n[2]:20.14}\t{area:20.14} \t{d:20.14}\n')
     
     model.SetName(f'Section{i:02}')
 
