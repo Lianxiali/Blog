@@ -9,7 +9,7 @@ logic.run()
 numberOfControlPoints = centerline.GetNumberOfControlPoints()
 pt = [0.0, 0.0, 0.0]
 section_data_file = open(r"/not_backed_up/lianxia/simulation/openfoam_run/KIDNEY/pressure_driven_fistula/crossSectionData/section_data.txt", "w")
-section_data_file.write(f"no\tx (mm)\ty (mm)\tz(mm)\tnx(mm)\tny(mm)\tnz(mm)\tarea(mm^2)\tdiameter(mm)\n")
+section_data_file.write(f"no\tx (mm)\ty (mm)\tz(mm)\tnx(-)\tny(-)\tnz(-)\tarea(mm^2)\tdiameter(mm)\n")
 for i in range(numberOfControlPoints):
     centerline.GetNthControlPointPositionWorld(i, pt)
     pointId = centerline.GetCurveWorld().FindPoint(pt)
