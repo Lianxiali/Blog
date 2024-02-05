@@ -8,8 +8,8 @@ logic.setLumenSurface(segmentation, "Segment_1")
 logic.run()
 numberOfControlPoints = centerline.GetNumberOfControlPoints()
 pt = [0.0, 0.0, 0.0]
-section_data_file = open(r"/afs/cas.unc.edu/users/l/l/llianxia/Documents/section_data.txt", "w")
-section_data_file.write(f"no\tx\ty\tz\tnx\tny\tnz\tarea\tdiameter\n")
+section_data_file = open(r"/not_backed_up/lianxia/simulation/openfoam_run/KIDNEY/pressure_driven_fistula/crossSectionData/section_data.txt", "w")
+section_data_file.write(f"no\tx (mm)\ty (mm)\tz(mm)\tnx(mm)\tny(mm)\tnz(mm)\tarea(mm^2)\tdiameter(mm)\n")
 for i in range(numberOfControlPoints):
     centerline.GetNthControlPointPositionWorld(i, pt)
     pointId = centerline.GetCurveWorld().FindPoint(pt)
@@ -39,13 +39,14 @@ for i in range(numberOfControlPoints):
     area=Mass.GetSurfaceArea()
     volume=Mass.GetVolume()
     d = np.sqrt(4*area/(np.pi))
-    section_data_file.write(f'{i:3}\t{pt[0]:20.14}\t{pt[1]:20.14}\t{pt[2]:20.14}\t{n[0]:20.14}\t{n[1]:20.14}\t{n[2]:20.14}\t{area:20.14} \t{d:20.14}\n')
+    # convert from RAS to LPS coordiante system by negating the first two coordiantes
+    section_data_file.write(f'{i:3}\t{-pt[0]:20.14}\t{-pt[1]:20.14}\t{pt[2]:20.14}\t{-n[0]:20.14}\t{-n[1]:20.14}\t{-n[2]:20.14}\t{area:20.14} \t{d:20.14}\n')
     
     model.SetName(f'Section{i:02}')
 
     
     filename = os.path.basename(model.GetName())
-    filepath = r'/afs/cas.unc.edu/users/l/l/llianxia/Documents/' + filename + ".stl"
+    filepath = r'/not_backed_up/lianxia/simulation/openfoam_run/KIDNEY/pressure_driven_fistula/crossSectionData/STL/' + filename + ".stl"
     slicer.util.exportNode(model, filepath, {"useCompression": 0})    
     
 section_data_file.close()    
