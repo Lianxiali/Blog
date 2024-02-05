@@ -5,6 +5,9 @@ centerline = getNode("Centerline curve (0)")
 segmentation = getNode("Segmentation")
 logic.setInputCenterlineNode(centerline)
 logic.setLumenSurface(segmentation, "Segment_1")
+outputTable = slicer.mrmlScene.AddNewNodeByClass("vtkMRMLTableNode", "centerlineTable")
+logic.outputTableNode = outputTable
+logic.coordinateSystemColumnRAS = False
 logic.run()
 numberOfControlPoints = centerline.GetNumberOfControlPoints()
 pt = [0.0, 0.0, 0.0]
@@ -30,14 +33,16 @@ for i in range(numberOfControlPoints):
     #n = -1*n # does not work
 
     # get cross-sectional area
-    tri_converter = vtk.vtkTriangleFilter()
-    tri_converter.SetInputDataObject(model.GetMesh())
-    tri_converter.Update()
-    Mass = vtk.vtkMassProperties() 
-    Mass.SetInputData(tri_converter.GetOutput()) 
-    Mass.Update() 
-    area=Mass.GetSurfaceArea()
-    volume=Mass.GetVolume()
+    #tri_converter = vtk.vtkTriangleFilter()
+    #tri_converter.SetInputDataObject(model.GetMesh())
+    #tri_converter.Update()
+    #Mass = vtk.vtkMassProperties() 
+    #Mass.SetInputData(tri_converter.GetOutput()) 
+    #Mass.Update() 
+    #area=Mass.GetSurfaceArea()
+    #volume=Mass.GetVolume()
+    area = logic.getCrossSectionArea(pointId)
+
     d = np.sqrt(4*area/(np.pi))
     # convert from RAS to LPS coordiante system by negating the first two coordiantes
     # negate the 3rd coordiante of normal vector to be consistant with paraview (it is equivalent to negating the first 2)
