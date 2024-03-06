@@ -1,7 +1,7 @@
 
 # file name: paraview.samrai.series
 
-## windows: use \\ for path
+## windows: use double slash \\\ for path
 
   {
     "file-series-version" : "1.0",
