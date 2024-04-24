@@ -1,6 +1,7 @@
 #from paraview.vtk.numpy_interface import dataset_adapter as dsa
 #from paraview.vtk.numpy_interface import algorithms as algs
 #import numpy
+# Need to merge block filter first for multiblock (exodus file)
 # programmerable filter
 # FF gradient of displacement
 
