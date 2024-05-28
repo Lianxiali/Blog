@@ -1,5 +1,6 @@
 import CrossSectionAnalysis
 import numpy as np
+impott os
 logic = CrossSectionAnalysis.CrossSectionAnalysisLogic()
 centerline = getNode("Centerline curve (0)")
 segmentation = getNode("Segmentation")
