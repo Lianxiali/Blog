@@ -2,7 +2,7 @@
 # file name: paraview.samrai.series
 
 ## windows: use double slash \\\ for path
-
+```
   {
     "file-series-version" : "1.0",
     "files" : [
@@ -10,9 +10,9 @@
       { "name" : "viz_IB2d\\visit_dump.00001\\summary.samrai", "time" : 2 },
     ]
   }
-
+```
 ## linux: use / for path
- 
+ ```
   {
     "file-series-version" : "1.0",
     "files" : [
@@ -24,7 +24,7 @@
       { "name" : "viz_IB2d/visit_dump.01000/summary.samrai", "time" : 10 },
     ]
   }
-
+```
 # Python code
 ```
 import os
