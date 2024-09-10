@@ -1,5 +1,6 @@
 
 # file name: paraview.samrai.series
+Thank Jonas for the bash code. https://groups.google.com/g/ibamr-users/c/_GUsO35XPAI/m/5sjBkhSxAwAJ
 
 ## windows: use double slash \\\ for path
 ```
