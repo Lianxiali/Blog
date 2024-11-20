@@ -15,6 +15,8 @@ pt = [0.0, 0.0, 0.0]
 # Python can handle forward slashes (/) on both Windows and Unix-like systems
 work_dir = r"C:/Drives/E/work/2023/project/kidney/Segmentations07032024/Segmentations/cut/0925C2-D7"
 section_prefix = "proximal_artery"
+os.makedirs(f"{work_dir}/crossSectionData", exist_ok=True)
+os.makedirs(f"{work_dir}/crossSectionData/STL", exist_ok=True)
 section_data_file = open(rf"{work_dir}/crossSectionData/{section_prefix}_section_data.txt", "w")
 section_data_file.write(f"{'no':<3}\t{'distance':<20}\t{'x (mm)':<20}\t{'y (mm)':<20}\t{'z(mm)':<20}\t{'nx(-)':<20}\t{'ny(-)':<20}\t{'nz(-)':<20}\t{'area(mm^2)':<20}\t{'diameter(mm)':<20}\n")
 for i in range(numberOfControlPoints):
