@@ -1,18 +1,21 @@
 import CrossSectionAnalysis
 import numpy as np
-impott os
+import os
 logic = CrossSectionAnalysis.CrossSectionAnalysisLogic()
 centerline = getNode("Centerline curve (0)")
-segmentation = getNode("Segmentation")
+segmentation = getNode("wall")
 logic.setInputCenterlineNode(centerline)
-logic.setLumenSurface(segmentation, "Segment_1")
+logic.setLumenSurface(segmentation, "wall")
 outputTable = slicer.mrmlScene.AddNewNodeByClass("vtkMRMLTableNode", "centerlineTable")
 logic.outputTableNode = outputTable
 logic.coordinateSystemColumnRAS = False
 logic.run()
 numberOfControlPoints = centerline.GetNumberOfControlPoints()
 pt = [0.0, 0.0, 0.0]
-section_data_file = open(r"/not_backed_up/lianxia/simulation/openfoam_run/KIDNEY/pressure_driven_fistula/crossSectionData/section_data.txt", "w")
+# Python can handle forward slashes (/) on both Windows and Unix-like systems
+work_dir = r"C:/Drives/E/work/2023/project/kidney/Segmentations07032024/Segmentations/cut/0925C2-D7"
+section_prefix = "proximal_artery"
+section_data_file = open(rf"{work_dir}/crossSectionData/{section_prefix}_section_data.txt", "w")
 section_data_file.write(f"{'no':<3}\t{'distance':<20}\t{'x (mm)':<20}\t{'y (mm)':<20}\t{'z(mm)':<20}\t{'nx(-)':<20}\t{'ny(-)':<20}\t{'nz(-)':<20}\t{'area(mm^2)':<20}\t{'diameter(mm)':<20}\n")
 for i in range(numberOfControlPoints):
     centerline.GetNthControlPointPositionWorld(i, pt)
@@ -31,17 +34,7 @@ for i in range(numberOfControlPoints):
     n=[0.0,0.0,0.0]
     # negative sign to change RAS (slicer) to LPS (paraview)    
     vtk.vtkTriangle().ComputeNormal(p0,p1,p2,n)
-    #n = -1*n # does not work
 
-    # get cross-sectional area
-    #tri_converter = vtk.vtkTriangleFilter()
-    #tri_converter.SetInputDataObject(model.GetMesh())
-    #tri_converter.Update()
-    #Mass = vtk.vtkMassProperties() 
-    #Mass.SetInputData(tri_converter.GetOutput()) 
-    #Mass.Update() 
-    #area=Mass.GetSurfaceArea()
-    #volume=Mass.GetVolume()
     area = logic.getCrossSectionArea(pointId)
 
     d = np.sqrt(4*area/(np.pi))
@@ -50,13 +43,10 @@ for i in range(numberOfControlPoints):
     # negate the 3rd coordiante of normal vector to be consistant with paraview (it is equivalent to negating the first 2)
     section_data_file.write(f'{i:<3}\t{distance:<20.14}\t{-pt[0]:<20.14}\t{-pt[1]:<20.14}\t{pt[2]:<20.14}\t{n[0]:<20.14}\t{n[1]:<20.14}\t{-n[2]:<20.14}\t{area:<20.14} \t{d:<20.14}\n')
     
-    model.SetName(f'Section{i:02}')
-
+    model.SetName(f'{section_prefix}_Section{i:02}')
     
     filename = os.path.basename(model.GetName())
-    filepath = r'/not_backed_up/lianxia/simulation/openfoam_run/KIDNEY/pressure_driven_fistula/crossSectionData/STL/' + filename + ".stl"
+    filepath = rf'{work_dir}/crossSectionData/STL/{filename}.stl'
     slicer.util.exportNode(model, filepath, {"useCompression": 0})    
     
 section_data_file.close()    
-
-
