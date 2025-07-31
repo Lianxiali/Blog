@@ -1,3 +1,0 @@
-# IBAMR CMake Instructions
-
-This document contains instructions for using CMake with the IBAMR project.
